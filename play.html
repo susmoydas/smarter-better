@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Play · SmartAvatar pocket arcade</title>
+<meta name="description" content="Four pixel games on one handheld: race, snake, blocks and shooter. Remote control, made playable.">
+<link rel="canonical" href="https://smartavatar-site.vercel.app/play">
+<meta property="og:type" content="website"><meta property="og:site_name" content="SmartAvatar"><meta property="og:title" content="Play · SmartAvatar pocket arcade"><meta property="og:description" content="Four pixel games on one handheld: race, snake, blocks and shooter. Remote control, made playable."><meta property="og:url" content="https://smartavatar-site.vercel.app/play"><meta property="og:image" content="https://smartavatar-site.vercel.app/assets/og.png">
+<meta name="twitter:card" content="summary_large_image"><meta name="theme-color" content="#F2F2EE">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;600;700&family=Silkscreen&display=swap" rel="stylesheet"><link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body data-page="play">
+<a class="skip" href="#main">Skip to content</a>
+<canvas id="pw" aria-hidden="true"></canvas>
+<div class="top"><a href="/" aria-label="SmartAvatar home"><b>SmartAvatar</b></a><span class="mono" id="clock">Delft --:--</span></div>
+<main id="main">
+<section class="wrap ph" style="min-height:auto;padding-bottom:40px"><div><div class="crumb mono"><a href="/">Home</a> <span>/</span> <span>Play</span></div><h1 class="dt">Pocket<br>arcade.</h1><p class="lead">Four small games on one handheld. Start with the A4 race from Delft to Rotterdam, then swap the cartridge for snake, blocks or a shooter.</p></div><div class="card" style="background:var(--butter)" data-rv><span class="mono">Why games?</span><h3>Real life, smaller screen</h3><p>Our operators steer real cranes from kilometres away. These games run on the same idea: you press, something far away moves.</p></div></section><section class="app" id="play" style="padding-top:20px"><div class="wrap"><div class="arena" id="arena">
+    <div class="side">
+      <div class="panel carts"><span class="mono">Cartridges · tap one to insert</span>
+        <div class="cartlist" id="carts">
+          <button class="cart on" data-cart="race" style="--c:#F5C95C"><span class="lab"><canvas width="16" height="16"></canvas><b>RACE</b></span><i></i></button>
+          <button class="cart" data-cart="snake" style="--c:#8FD9C9"><span class="lab"><canvas width="16" height="16"></canvas><b>SNAKE</b></span><i></i></button>
+          <button class="cart" data-cart="blocks" style="--c:#ABABF5"><span class="lab"><canvas width="16" height="16"></canvas><b>BLOCKS</b></span><i></i></button>
+          <button class="cart" data-cart="shooter" style="--c:#F2A7E6"><span class="lab"><canvas width="16" height="16"></canvas><b>SHOOTER</b></span><i></i></button>
+        </div></div>
+      <div class="panel score"><span class="mono" id="bestlab">Your best · Race</span><b class="dt" id="best">0</b><small><span id="now">Press start to play</span> · saved on this device</small></div>
+    </div>
+    <div class="stagewrap"><div class="gb" id="gb">
+      <div class="slot" id="slot"><span id="slotlab" style="--c:#F5C95C">RACE</span></div>
+      <div class="bezel"><div class="bz"><span><i></i>LIVE · <span id="lat">18</span> MS</span><span id="bzr">A4 · DELFT → ROTTERDAM</span></div><canvas id="screen" width="240" height="200" aria-label="Handheld game screen"></canvas></div>
+      <div class="brand">SmartAvatar</div>
+      <div class="ctl">
+        <div class="dpad"><button class="u" data-k="up" aria-label="Up"></button><button class="l" data-k="left" aria-label="Left"></button><button class="r" data-k="right" aria-label="Right"></button><button class="d" data-k="down" aria-label="Down"></button></div>
+        <div class="ab"><button class="b" data-k="b" aria-label="B">B</button><button class="a" data-k="a" aria-label="A">A</button></div>
+      </div>
+      <div class="ss"><button data-k="select" aria-label="Restart">SELECT</button><button class="go" data-k="start" aria-label="Start">START</button></div>
+      <div class="grille"></div>
+    </div></div>
+    <div class="side">
+      <div class="panel"><span class="mono">How to play</span><h3 id="howh">Reach Rotterdam before the clock runs out.</h3>
+        <ul class="rules" id="howr"></ul>
+        <ul class="keys" id="howk"></ul>
+        <small class="touch">On a phone, use the buttons on the device.</small></div>
+      <div class="panel tip"><span class="mono">Real life</span><p>Our operators steer real cranes from kilometres away. Same idea, smaller screen.</p></div>
+    </div>
+  </div>
+</div></section>
+</main>
+<footer id="foot">
+  <canvas id="fc"></canvas>
+  <div class="corner tl"><b>Delft · HQ</b><span class="clk" data-tz="Europe/Amsterdam">--:--</span><br><b style="margin-top:10px">Mountain View</b><span class="clk" data-tz="America/Los_Angeles">--:--</span></div>
+  <div class="corner tr"><b>Follow us</b><div class="soc" style="justify-content:flex-end;margin:4px 0 14px"><a href="#" data-page="LinkedIn" aria-label="LinkedIn"><canvas data-ico="li" width="20" height="20"></canvas></a><a href="#" data-page="YouTube" aria-label="YouTube"><canvas data-ico="yt" width="20" height="20"></canvas></a><a href="#" data-page="Instagram" aria-label="Instagram"><canvas data-ico="ig" width="20" height="20"></canvas></a><a href="#" data-page="X" aria-label="X"><canvas data-ico="x" width="20" height="20"></canvas></a></div><b>Explore</b><a href="/machines">Machines</a><a href="/platform">Platform</a><a href="/play">Play</a><a href="/research">Research</a></div>
+  <div class="corner bl"><b>Company</b><a href="https://tuliptech.nl" target="_blank" rel="noopener">TulipTech ↗</a><a href="/banded">BÅNDED</a><span style="color:var(--grey);font-size:12px">© 2026 SmartAvatar B.V.</span></div>
+  <div class="corner br"><b>Legal</b><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/verify">Verify certificate</a></div>
+  <div class="mail"><div class="mrow"><span class="addr">info@smartavatar.nl</span><button class="more" id="copy">Copy</button><a class="more ghost" href="mailto:info@smartavatar.nl">Email us</a></div></div>
+</footer>
+<nav class="dock" id="dock" aria-label="Main"></nav>
+<div id="toast" role="status"></div>
+<div id="cur" aria-hidden="true"><div id="box"><b class="c1"></b><b class="c2"></b><b class="c3"></b><b class="c4"></b><span></span></div><i id="pt"></i></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="/assets/site.js"></script>
+<script src="/assets/arcade.js"></script>
+</body>
+</html>

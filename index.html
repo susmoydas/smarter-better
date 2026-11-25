@@ -3,7 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SmartAvatar</title>
+<title>SmartAvatar · Live digital twins for real machines</title>
+<meta name="description" content="SmartAvatar gives real machines a live, trusted avatar. Watch them, update them and keep them safe from anywhere. Deep tech from Delft.">
+<link rel="canonical" href="https://smartavatar-site.vercel.app/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="SmartAvatar"><meta property="og:title" content="SmartAvatar · Live digital twins for real machines"><meta property="og:description" content="Give any machine a live, trusted avatar. Deep tech from Delft."><meta property="og:url" content="https://smartavatar-site.vercel.app/"><meta property="og:image" content="https://smartavatar-site.vercel.app/assets/og.png">
+<meta name="twitter:card" content="summary_large_image"><meta name="theme-color" content="#F2F2EE">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;600;700&family=Silkscreen&display=swap" rel="stylesheet">
@@ -288,6 +293,9 @@ body.focus #play{background:#111}body.focus #play .app-head{opacity:.35}body.foc
 #strips #set.rows .lb{left:28%;right:0;top:0;bottom:0;display:flex;flex-direction:column;justify-content:center;padding:4px 12px 4px 4px;background:transparent}
 #strips #set.rows .lb b{font-size:16px}
 #strips #set.rows .lb small{display:block;font-size:13px;line-height:1.35;margin-top:3px}
+.skip{position:fixed;left:12px;top:-60px;z-index:300;background:#111;color:#fff;padding:10px 14px;font-family:"Pixelify Sans",monospace;transition:top .2s}.skip:focus{top:12px}
+#pw{position:fixed;inset:0;width:100%;height:100%;z-index:160;pointer-events:none}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:3px solid #111;outline-offset:3px}
 @media (max-width:900px){
   .arena{grid-template-columns:1fr!important}.arena .stagewrap{order:-1}.side{grid-template-columns:1fr 1fr}
   .team{grid-template-columns:1fr}
@@ -319,7 +327,9 @@ body.focus #play{background:#111}body.focus #play .app-head{opacity:.35}body.foc
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
-<body>
+<body data-page="home">
+<a class="skip" href="#machines">Skip to content</a>
+<canvas id="pw" aria-hidden="true"></canvas>
 
 <canvas id="txc" aria-hidden="true"></canvas>
 <div id="loader"><canvas id="ldc" width="240" height="240"></canvas><span class="mono">SmartAvatar · Delft</span><span class="pc dt" id="pc">0%</span></div>
@@ -330,7 +340,7 @@ body.focus #play{background:#111}body.focus #play .app-head{opacity:.35}body.foc
     <div class="boot mono" id="boot">warming up…</div>
     <h1 class="dt" id="title" aria-label="SmartAvatar"></h1>
     <p class="sub">We give real machines a <b>live digital twin</b>, so you can watch them, update them and keep them safe from wherever you are. Built in Delft.</p>
-    <div class="actions"><a class="more" href="#contact" data-page="/contact">Book a demo <i>→</i></a><a class="more ghost" href="#play">Play the game <i>→</i></a></div>
+    <div class="actions"><a class="more" href="/contact">Book a demo <i>→</i></a><a class="more ghost" href="#play">Play the game <i>→</i></a></div>
   </div>
   <div class="hint"><canvas id="dive" width="168" height="120" aria-label="Scroll down"></canvas></div>
 </section>
@@ -343,7 +353,7 @@ body.focus #play{background:#111}body.focus #play .app-head{opacity:.35}body.foc
     <h2 class="dt">Any machine can have an avatar.</h2>
     <div class="mrow"><span class="mono" id="mcount">01 / 04</span></div><div class="who" id="who"></div>
     <div class="steps" id="steps"><i></i><i></i><i></i><i></i></div>
-    <a class="more" href="#" data-page="/machines">See all machines <i>→</i></a>
+    <a class="more" href="/machines">See all machines <i>→</i></a>
   </div>
 </div></section>
 
@@ -359,7 +369,7 @@ body.focus #play{background:#111}body.focus #play .app-head{opacity:.35}body.foc
 <!-- 3 · strips -->
 <section id="platform"><div class="pin" id="strips">
   <div class="set" id="set"></div>
-  <div class="title"><div><h2 class="dt">One avatar. Five powers.</h2><p>Our real-time platform, split into the five things it does.</p></div><a class="more" href="#" data-page="/platform">Explore the platform <i>→</i></a></div>
+  <div class="title"><div><h2 class="dt">One avatar. Five powers.</h2><p>Our real-time platform, split into the five things it does.</p></div><a class="more" href="/platform">Explore the platform <i>→</i></a></div>
 </div></section>
 
 <!-- 4 · wipe -->
@@ -420,7 +430,7 @@ body.focus #play{background:#111}body.focus #play .app-head{opacity:.35}body.foc
 <div class="tx" data-p="rain"></div>
 <!-- team -->
 <section class="app grid-bg" id="team"><div class="wrap">
-  <div class="app-head"><div><h2 class="dt">Who we are</h2><a class="more" href="#" data-page="/team">Meet the team <i>→</i></a></div>
+  <div class="app-head"><div><h2 class="dt">Who we are</h2><a class="more" href="/team">Meet the team <i>→</i></a></div>
   <p>A small team of engineers and researchers in the Netherlands, Bangladesh and Taiwan.</p></div>
   <div class="team" id="teamg"></div>
 </div></section>
@@ -430,9 +440,9 @@ body.focus #play{background:#111}body.focus #play .app-head{opacity:.35}body.foc
 <footer id="foot">
   <canvas id="fc"></canvas>
   <div class="corner tl"><b>Delft · HQ</b><span class="clk" data-tz="Europe/Amsterdam">--:--</span><br><b style="margin-top:10px">Mountain View</b><span class="clk" data-tz="America/Los_Angeles">--:--</span></div>
-  <div class="corner tr"><b>Follow us</b><div class="soc" style="justify-content:flex-end;margin:4px 0 14px"><a href="#" data-page="LinkedIn" aria-label="LinkedIn"><canvas data-ico="li" width="20" height="20"></canvas></a><a href="#" data-page="YouTube" aria-label="YouTube"><canvas data-ico="yt" width="20" height="20"></canvas></a><a href="#" data-page="Instagram" aria-label="Instagram"><canvas data-ico="ig" width="20" height="20"></canvas></a><a href="#" data-page="X" aria-label="X"><canvas data-ico="x" width="20" height="20"></canvas></a></div><b>Explore</b><a href="#machines">Machines</a><a href="#platform">Platform</a><a href="#play">Play</a><a href="#research">Research</a></div>
-  <div class="corner bl"><b>Company</b><a href="https://tuliptech.nl" target="_blank" rel="noopener">TulipTech ↗</a><a href="#team">BÅNDED</a><span style="color:var(--grey);font-size:12px">© 2026 SmartAvatar B.V.</span></div>
-  <div class="corner br"><b>Legal</b><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Verify certificate</a></div>
+  <div class="corner tr"><b>Follow us</b><div class="soc" style="justify-content:flex-end;margin:4px 0 14px"><a href="#" data-page="LinkedIn" aria-label="LinkedIn"><canvas data-ico="li" width="20" height="20"></canvas></a><a href="#" data-page="YouTube" aria-label="YouTube"><canvas data-ico="yt" width="20" height="20"></canvas></a><a href="#" data-page="Instagram" aria-label="Instagram"><canvas data-ico="ig" width="20" height="20"></canvas></a><a href="#" data-page="X" aria-label="X"><canvas data-ico="x" width="20" height="20"></canvas></a></div><b>Explore</b><a href="/machines">Machines</a><a href="/platform">Platform</a><a href="/play">Play</a><a href="/research">Research</a></div>
+  <div class="corner bl"><b>Company</b><a href="https://tuliptech.nl" target="_blank" rel="noopener">TulipTech ↗</a><a href="/banded">BÅNDED</a><span style="color:var(--grey);font-size:12px">© 2026 SmartAvatar B.V.</span></div>
+  <div class="corner br"><b>Legal</b><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/verify">Verify certificate</a></div>
   <div class="mail"><div class="mrow"><span class="addr">info@smartavatar.nl</span><button class="more" id="copy">Copy</button><a class="more ghost" href="mailto:info@smartavatar.nl">Email us</a></div></div>
 </footer>
 
@@ -687,7 +697,7 @@ gsap.timeline({scrollTrigger:{trigger:'#wipe',start:'top 80%',end:'bottom top',s
 const IND=['Construction','Manufacturing','Hospitals','Mobility','Farming','Fleets'];
 const CS=[['crane','Heavy equipment','Cranes and excavators, run from a safe office instead of the cab.','#DCEBFA','40 km','between operator and crane, 18 ms delay'],['robot','Robotics','The service gets booked before the part actually breaks.','#E3E3FF','212 h','warning before a joint fails'],['cart','Healthcare','Medical data people can trust, with every access written down.','#FFE3FB','100%','of data access logged and verifiable'],['car','Insurance','Clear proof of who drove, when, and how carefully.','#FFE7A9','1 tap','to prove who was driving'],['tractor','Agriculture','Tractors that only take orders they can verify.','#E9FAC0','v4.12','signed update, automatic rollback'],['shield','Security','Spot an intruder anywhere in the fleet, the moment it happens.','#DBF5F0','0','unverified commands executed']];
 const POS=[[-.32,-.2],[.3,-.24],[-.22,.22],[.26,.18],[-.04,-.05],[.05,.28]];
-$('#space').innerHTML=CS.map((c,i)=>`<div class="card" style="background:${c[3]}"><span class="mono">${IND[i]}</span><div class="fr"><img alt="" src="${dotImg(c[0],6,'#111',300)}"><b>${c[1]}</b><small>${c[2]}</small><a class="rd" href="#" data-page="/machines/${c[1].toLowerCase().replace(/ /g,'-')}">Read the case →</a></div><div class="bk"><span class="dt">${c[4]}</span><small>${c[5]}</small></div></div>`).join('');
+$('#space').innerHTML=CS.map((c,i)=>`<div class="card" style="background:${c[3]}"><span class="mono">${IND[i]}</span><div class="fr"><img alt="" src="${dotImg(c[0],6,'#111',300)}"><b>${c[1]}</b><small>${c[2]}</small><a class="rd" href="/machines/${c[1].toLowerCase().replace(/ /g,'-')}">Read the case →</a></div><div class="bk"><span class="dt">${c[4]}</span><small>${c[5]}</small></div></div>`).join('');
 const cards=$$('#space .card');cards.forEach(c=>{c.dataset.c='flip';c.addEventListener('click',()=>{gsap.fromTo(c,{rotationY:0},{rotationY:360,duration:.7,ease:'power3.inOut',clearProps:'rotationY'});setTimeout(()=>c.classList.toggle('flip'),300)})});
 function placeCards(p){const w=innerWidth,h=innerHeight,cw=cards[0].offsetWidth;cards.forEach((c,i)=>{const start=i*.12,local=clamp((p-start)/.42,0,1);const z=lerp(-2600,900,local);
   const op=local<=0?0:local<.1?local*10:local>.85?Math.max(0,(1-local)/.15):1;
@@ -698,13 +708,14 @@ ScrollTrigger.create({trigger:'#cases',start:'top top',end:'+=460%',pin:true,scr
 /* ================= RESEARCH: thin-line bars ================= */
 const EU=[['MetaCities',2023,2026,'Digital twins of urban life, from traffic to public services.','#FFE7A9'],['6G-ICARUS',2024,2028,'Intelligent 6G networks that adapt to the machines they connect.','#DCEBFA'],['ISAC-NEWTON',2025,2029,'Networks that sense as well as talk, for safer shared spaces.','#DBF5F0'],['REFEREE',2026,2029,'Verification and trust for autonomous systems.','#FFE3FB'],['EcoAgent-6G',2026,2029,'AI agents that cut the energy use of networks and fleets.','#E9FAC0'],['TeraHealth',2027,2029,'Terahertz links and secure data for connected care.','#E3E3FF']];
 $('#chart').innerHTML=EU.map((e,i)=>{const yrs=e[2]-e[1]+1;return `<button class="col" data-i="${i}" style="--c:${e[4]};--h:${yrs/5*100}%"><div class="lines">${'<i></i>'.repeat(yrs*2*6)}</div><span class="yr dt">${yrs} yrs</span><span class="nm">${e[0]}</span></button>`}).join('');
-function showEU(i){const e=EU[i];$$('#chart .col').forEach((c,j)=>c.classList.toggle('on',j===i));$('#detail').innerHTML=`<b>${e[0]}</b><span class="mono">${e[1]} → ${e[2]}</span><p>${e[3]}</p><a class="more" href="#" data-page="/research/${e[0].toLowerCase()}" style="margin-top:0">View project <i>→</i></a>`}
+function showEU(i){const e=EU[i];$$('#chart .col').forEach((c,j)=>c.classList.toggle('on',j===i));$('#detail').innerHTML=`<b>${e[0]}</b><span class="mono">${e[1]} → ${e[2]}</span><p>${e[3]}</p><a class="more" href="/research/${e[0].toLowerCase()}" style="margin-top:0">View project <i>→</i></a>`}
 $$('#chart .col').forEach(c=>{c.addEventListener('click',()=>showEU(+c.dataset.i));c.addEventListener('mouseenter',()=>showEU(+c.dataset.i))});showEU(0);
 $$('#chart .lines').forEach(l=>gsap.fromTo(l.children,{scale:0},{scale:1,ease:'none',stagger:{each:.02,from:'end'},scrollTrigger:{trigger:'#chart',start:'top 85%',end:'bottom 55%',scrub:.6}}));
 
 /* ================= TEAM ================= */
 const TM=[['Office · HQ','Delft','Where it started, and where most of the work still happens.','#FFE7A9','house'],['Office','Amsterdam','Open by appointment, for partners and projects.','#DCEBFA','globe'],['Office','Mountain View','Open by appointment, for our US partners.','#DBF5F0','bolt'],['Service','Consulting','Help with tech projects, innovation funding and Zero Trust security.','#FFFFFF','chip'],['Programme','BÅNDED','For cities, institutions, universities and NGOs, plus BåndFixIt.','#FFE3FB','people'],['Sister studio','TulipTech','Custom SaaS, AI mobile apps and medical AI.','#E3E3FF','avatar']];
-$('#teamg').innerHTML=TM.map(t=>`<div class="card2" style="background:${t[3]}"><span class="mono">${t[0]}</span><h3 class="dt">${t[1]}</h3><p>${t[2]}</p><img alt="" src="${dotImg(t[4],10,'#111',144)}"></div>`).join('');
+const TL={Consulting:'/consulting','BÅNDED':'/banded',TulipTech:'https://tuliptech.nl'};
+$('#teamg').innerHTML=TM.map(t=>`<${TL[t[1]]?'a href="'+TL[t[1]]+'"'+(t[1]==='TulipTech'?' target="_blank" rel="noopener"':''):'div'} class="card2" style="background:${t[3]}"><span class="mono">${t[0]}</span><h3 class="dt">${t[1]}</h3><p>${t[2]}</p><img alt="" src="${dotImg(t[4],10,'#111',144)}"></${TL[t[1]]?'a':'div'}>`).join('');
 $$('.card2').forEach((c,i)=>{gsap.fromTo(c,{y:60,opacity:0,rotation:i%2?2:-2},{y:0,opacity:1,rotation:0,duration:.8,ease:'power3.out',scrollTrigger:{trigger:c,start:'top 92%',toggleActions:'play none none reverse'}});
   c.dataset.c='hello';const img=c.querySelector('img');const rx=gsap.quickTo(c,'rotationX',{duration:.4}),ry=gsap.quickTo(c,'rotationY',{duration:.4});gsap.set(c,{transformPerspective:800});
   c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();rx(((e.clientY-r.top)/r.height-.5)*-8);ry(((e.clientX-r.left)/r.width-.5)*10)});
@@ -715,7 +726,7 @@ $$('.card2').forEach(c=>{const n=c.querySelector('h3').textContent;if(TZ[n]){con
 
 /* ================= FOOTER: dot playground ================= */
 const fc=$('#fc'),fx=fc.getContext('2d');let FD=[],fW=0,fH=0,fVis=false,fm={x:-999,y:-999,down:false};
-function fBuild(){const r=fc.getBoundingClientRect();fW=r.width;fH=r.height;fc.width=fW*DPR;fc.height=fH*DPR;
+function fBuild(){const r=fc.getBoundingClientRect();fW=Math.round(r.width);fH=Math.round(r.height);if(!fW||!fH){setTimeout(fBuild,300);return}fc.width=fW*DPR;fc.height=fH*DPR;
   const t=document.createElement('canvas');t.width=fW;t.height=fH;const c=t.getContext('2d');c.fillStyle='#000';c.textAlign='center';c.textBaseline='middle';
   const fs=Math.min(fW<600?fW/3.6:fW/4.6,fH*.36);c.font=`900 ${fs}px Satoshi, sans-serif`;c.fillText('SAY HI',fW/2,fH*.44);
   const d=c.getImageData(0,0,fW,fH).data,step=fW<600?7:10;FD=[];
@@ -941,6 +952,12 @@ if(matchMedia('(hover:hover) and (pointer:fine)').matches&&!RM){const cur=$('#cu
 })();
 ['#play','#research','#team'].forEach(id=>ScrollTrigger.create({trigger:id,start:()=>$(id).offsetHeight>innerHeight?'bottom bottom':'top top',end:'+=45%',pin:true,pinSpacing:true}));
 ScrollTrigger.sort();
+const PW=(function(){const cv=$('#pw');const c=cv.getContext('2d');const BAY=[0,8,2,10,12,4,14,6,3,11,1,9,15,7,13,5];let cs=44,cells=[];const rnd=i=>Math.abs(Math.sin(i*127.1)*43758.5)%1;
+  function size(){cs=innerWidth<600?28:44;cv.width=innerWidth;cv.height=innerHeight;const cols=Math.ceil(innerWidth/cs),rows=Math.ceil(innerHeight/cs);cells=[];for(let y=0;y<rows;y++)for(let x=0;x<cols;x++){const h=rnd(x*91+y*17);cells.push({x,y,r:(BAY[(y%4)*4+x%4]+rnd(x*31+y)*.9)/16.9,col:h<.1?PAL[Math.floor(h*60)%PAL.length]:'#111'})}}
+  size();addEventListener('resize',size);const draw=v=>{c.clearRect(0,0,cv.width,cv.height);for(const k of cells){if(k.r<v){const e=Math.min(1,(v-k.r)*6),sz=cs*e;c.fillStyle=k.col;c.fillRect(k.x*cs+(cs-sz)/2,k.y*cs+(cs-sz)/2,sz+.5,sz+.5)}}};
+  return {draw,cover(done){const o={v:0};gsap.to(o,{v:1.2,duration:.5,ease:'power1.in',onUpdate:()=>draw(o.v),onComplete:done})}}})();
+addEventListener('pageshow',e=>{if(e.persisted)PW.draw(0)});
+document.addEventListener('click',e=>{const a=e.target.closest('a');if(!a||e.defaultPrevented)return;const h=a.getAttribute('href')||'';if(!h.startsWith('/')||a.target==='_blank'||e.metaKey||e.ctrlKey||RM)return;e.preventDefault();PW.cover(()=>{location.href=h})});
 addEventListener('load',()=>{window.scrollTo(0,0);if(lenis)lenis.scrollTo(0,{immediate:true,force:true});ScrollTrigger.refresh()});
 })();
 </script>
