@@ -331,6 +331,12 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   #foot .addr{font-size:22px}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ===== one shape language: slightly rounded + pixel-cut corners, like the buttons ===== */
+:root{--px4:polygon(0 4px,4px 4px,4px 0,calc(100% - 4px) 0,calc(100% - 4px) 4px,100% 4px,100% calc(100% - 4px),calc(100% - 4px) calc(100% - 4px),calc(100% - 4px) 100%,4px 100%,4px calc(100% - 4px),0 calc(100% - 4px));--px8:polygon(0 8px,8px 8px,8px 0,calc(100% - 8px) 0,calc(100% - 8px) 8px,100% 8px,100% calc(100% - 8px),calc(100% - 8px) calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,8px calc(100% - 8px),0 calc(100% - 8px))}
+.chip,.filters button,.dock a .tip,#toast,.lv-list a,.rules li,.keys kbd,.howto kbd,.games li,#morph .chips span,#thru .ticks span,.tm-msg,.vout,.dout,
+#term input,.form input,.form select,.form textarea,.skip,#cur #box span,.case-card img,#cases .card img,#cases .card .bk,.gb .slot span{border-radius:0!important;clip-path:var(--px4)}
+.card,.card2,.case-card,.panel,.step,.fact,.cta-band,.tl-row,.nextlink a,.stagewrap,#term,.demo .screen,.demo .side,#cases .card,#strips .st,.art,.ph .art,.ms-pin::before{border-radius:0!important;clip-path:var(--px8)}
 </style>
 </head>
 <body data-page="home">

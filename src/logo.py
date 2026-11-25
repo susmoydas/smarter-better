@@ -1,5 +1,5 @@
 # SmartAvatar mark: an animated pixel avatar (blinks, antenna light pulses, gentle bob)
-INK='#111111';P='#8B6CF0';PL='#E6DEFF';PK='#F2A7E6';W='#FFFFFF'
+INK='#111111';P='#FFFFFF';PL='#D9D9D4';PK='#8C8C8C';W='#111111'
 G=["......#.........",
    "......k.........",
    "......#.........",
@@ -28,7 +28,7 @@ def svg(size=64,anim=True):
     css=('<style>.h{animation:b 2.4s steps(1) infinite}.e{transform-origin:50% 47%;transform-box:view-box;animation:k 4s steps(1) infinite}.t{animation:t 1.2s steps(1) infinite}'
          '@keyframes b{50%{transform:translateY('+format(-s*0.5,'g')+'px)}}@keyframes k{0%,92%,100%{transform:scaleY(1)}94%,98%{transform:scaleY(.15)}}@keyframes t{50%{fill:'+P+'}}</style>') if anim else ''
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {size} {size}" shape-rendering="crispEdges">{css}'
-            f'<g class="h">{"".join(head)}<rect class="t" x="{6*s:g}" y="{1*s:g}" width="{s:g}" height="{s:g}" fill="{PK}"/><g class="e" fill="{INK}">{eyes}</g></g>{"".join(body)}</svg>')
+            f'<g class="h">{"".join(head)}<rect class="t" x="{6*s:g}" y="{1*s:g}" width="{s:g}" height="{s:g}" fill="{PK}"/><g class="e" fill="#FFFFFF">{eyes}</g></g>{"".join(body)}</svg>')
 open('assets/logo.svg','w').write(svg(64))
 open('assets/favicon.svg','w').write(svg(32))
 open('assets/logo-static.svg','w').write(svg(64,False))
