@@ -14,9 +14,9 @@ def cartl(href,label,color,shape): return f'<a class="cartl" href="{href}" style
 def case_card(c): return f'<a class="case-card" href="/machines/{c["slug"]}" style="background:{c["color"]}" data-tilt><span class="mono">{c["ind"]}</span><img alt="" data-dot="{c["shape"]}" data-cell="6" data-size="300"><h3>{c["name"]}</h3><p>{c["lead"]}</p><span class="go">Read the case →</span></a>'
 
 # platform hub: the five powers as one morph story
-body=dwhero('Platform',crumb(('Platform',None)),'Our real-time platform gives every machine a live, trusted avatar. Scroll to meet the five things it does.',more('Book a demo','/contact'))
+body=dwhero('Platform',crumb(('Platform',None)),'Our real-time platform gives every machine a live, trusted avatar.',more('Book a demo','/contact'))
 body+=ms([dict(shape=f['icon'],color=f['color'],kicker='Power',title=f['name'],text=f['lead'],href='/platform/'+f['slug'],cta='Open '+f['name']) for f in FEAT])
-body+=nextbig('Machines','/machines','Next · see it on real machines')
+body+=nextbig('Machines','/machines','Next')
 page('platform','Platform · SmartAvatar','The SmartAvatar platform gives every machine a live, trusted avatar: live twin, OTA updates, remote control, edge AI and Zero Trust.','platform',body)
 
 # feature pages: steps as a morph story, a playable demo, the machines that use it
@@ -26,15 +26,15 @@ for i,f in enumerate(FEAT):
     extra=('<label class="mono" style="display:flex;flex-direction:column;gap:8px">Vibration<input type="range" min="0" max="100" value="20"></label>' if f['demo']=='edge-ai' else '')
     body=dwhero(f['name'],crumb(('Platform','/platform'),(f['name'],None)),f['lead'],more('Try it','#demo'),.86)
     body+=ms([dict(shape=STEP_SHAPES[f['slug']][k],color=f['color'],kicker='How it works',title=t,text=d) for k,(t,d) in enumerate(f['steps'])])
-    body+=f'<section class="sec" id="demo"><div class="wrap"><div class="sh"><h2 class="dt">Try it</h2><p>A small version of the real thing.</p></div><div class="demo" data-demo="{f["demo"]}"><div class="screen"><canvas width="320" height="200" aria-label="{e(f["name"])} demo"></canvas></div><div class="side"><span class="mono">Demo</span><h3>{e(f["dtitle"])}</h3><p>{e(f["dtext"])}</p>{extra}<div class="dbtns">{btns}</div><div class="dout" aria-live="polite"></div></div></div></div></section>'
-    body+=f'<section class="sec alt"><div class="wrap split"><div><h2 class="dt">Used on</h2><p>Machines that rely on {e(f["name"].lower())}. Pick a cartridge.</p></div><div class="carts-row">{"".join(cartl("/machines/"+c["slug"],c["name"],c["color"],c["shape"]) for c in rel)}</div></div></section>'
+    body+=f'<section class="sec" id="demo"><div class="wrap"><div class="sh"><h2 class="dt">Try it</h2></div><div class="demo" data-demo="{f["demo"]}"><div class="screen"><canvas width="320" height="200" aria-label="{e(f["name"])} demo"></canvas></div><div class="side"><span class="mono">Demo</span><h3>{e(f["dtitle"])}</h3><p>{e(f["dtext"])}</p>{extra}<div class="dbtns">{btns}</div><div class="dout" aria-live="polite"></div></div></div></div></section>'
+    body+=f'<section class="sec alt"><div class="wrap split"><div><h2 class="dt">Used on</h2></div><div class="carts-row">{"".join(cartl("/machines/"+c["slug"],c["name"],c["color"],c["shape"]) for c in rel)}</div></div></section>'
     body+=nextbig(nxt['name'],'/platform/'+nxt['slug'],'Next power')
     page('platform/'+f['slug'],f'{f["name"]} · SmartAvatar platform',f['lead'],'platform',body)
 
 # machines hub: a sideways gallery
-body=dwhero('Machines',crumb(('Machines',None)),'The same platform, working in very different places. Keep scrolling and the machines slide past.',more('Book a demo','/contact'))
-body+=f'<section class="hg"><div class="wrap hg-head"><h2 class="dt">Six machines,<br>six stories.</h2><p>Construction, factories, hospitals, roads, farms and whole fleets.</p></div><div class="hg-track">{"".join(case_card(c) for c in CASES)}</div><div class="hg-bar"><i></i></div></section>'
-body+=nextbig('Platform','/platform','Next · how it works')
+body=dwhero('Machines',crumb(('Machines',None)),'Six places where the same platform runs.',more('Book a demo','/contact'))
+body+=f'<section class="hg"><div class="wrap hg-head"><h2 class="dt">Six machines,<br>six stories.</h2></div><div class="hg-track">{"".join(case_card(c) for c in CASES)}</div><div class="hg-bar"><i></i></div></section>'
+body+=nextbig('Platform','/platform','Next')
 page('machines','Machines · SmartAvatar','How SmartAvatar works on cranes, robots, medical carts, cars, tractors and whole fleets.','machines',body)
 
 # case pages: problem → what we do → result, as a morph story
@@ -43,64 +43,62 @@ for i,c in enumerate(CASES):
     body=dwhero(c['name'],crumb(('Machines','/machines'),(c['name'],None)),c['lead'],more('Book a demo','/contact'),.86)
     body+=ms([dict(shape=c['shape'],color=c['color'],kicker=c['ind'],title='The problem',text=c['ch']),
               dict(shape='avatar',color=c['color'],kicker=c['ind'],title='What SmartAvatar does',text=c['ap']),
-              dict(shape=FEAT_ICON[tf],color=c['color'],kicker=c['ind'],title='The result',text=c['out'],stat=c['stat'][0],statLabel=c['stat'][1])])
-    body+=f'<section class="sec alt"><div class="wrap split"><div><h2 class="dt">Powers used</h2><p>The parts of the platform this machine runs on.</p></div><div class="carts-row">{"".join(cartl("/platform/"+s,FBY[s]["name"],FBY[s]["color"],FBY[s]["icon"]) for s in c["feats"])}</div></div></section>'
+              dict(shape=FEAT_ICON[tf],color=c['color'],kicker=c['ind'],title='The result',text=c['out'])])
+    body+=f'<section class="sec alt"><div class="wrap split"><div><h2 class="dt">Powers used</h2></div><div class="carts-row">{"".join(cartl("/platform/"+s,FBY[s]["name"],FBY[s]["color"],FBY[s]["icon"]) for s in c["feats"])}</div></div></section>'
     body+=nextbig(nxt['name'],'/machines/'+nxt['slug'],'Next machine')
     page('machines/'+c['slug'],f'{c["name"]} · SmartAvatar',c['lead'],'machines',body)
 
 # research hub: walk the years
 PJ=[dict(slug=s,name=n,start=a,end=b,color=col) for s,n,a,b,col,sh,d in PROJ]
-body=dwhero('Research',crumb(('Research',None)),'We work with partners across Europe on 6G, digital twins and AI you can trust, through six Horizon Europe programmes.',more('Work with us','/contact'))
-body+=f'<section class="level" data-projects="{J(PJ)}"><div class="lv-pin"><canvas aria-hidden="true"></canvas><div class="lv-ui"><div class="lv-year">2023</div><div class="lv-list" aria-live="polite"></div></div><div class="lv-help mono">Scroll to walk the timeline · click a project</div></div></section>'
-body+=f'<section class="sec"><div class="wrap split"><div><h2 class="dt">All six</h2><p>Jump straight to a project.</p></div><div class="carts-row">{"".join(cartl("/research/"+s,n,col,sh) for s,n,a,b,col,sh,d in PROJ)}</div></div></section>'
-body+=nextbig('Team','/team','Next · the people')
+body=dwhero('Research',crumb(('Research',None)),'SmartAvatar is a partner in six Horizon Europe projects.',more('Work with us','/contact'))
+body+=f'<section class="level" data-projects="{J(PJ)}"><div class="lv-pin"><canvas aria-hidden="true"></canvas><div class="lv-ui"><div class="lv-year">2023</div><div class="lv-list" aria-live="polite"></div></div></div></section>'
+body+=f'<section class="sec"><div class="wrap split"><div><h2 class="dt">All six</h2></div><div class="carts-row">{"".join(cartl("/research/"+s,n,col,sh) for s,n,a,b,col,sh,d in PROJ)}</div></div></section>'
+body+=nextbig('Team','/team','Next')
 page('research','Research · SmartAvatar','SmartAvatar is a partner in six Horizon Europe programmes on 6G, digital twins and trustworthy AI.','research',body)
 for i,(s,n,a,b,col,sh,d) in enumerate(PROJ):
     nx=PROJ[(i+1)%len(PROJ)]
     body=dwhero(n,crumb(('Research','/research'),(n,None)),e(d),more('All projects','/research'),.86)
-    body+=f'<section class="sec"><div class="wrap"><div class="sh"><h2 class="dt">{a}–{b}</h2><p>{b-a+1} years in Horizon Europe. Walk along with it.</p></div><canvas class="ytrack" data-start="{a}" data-end="{b}" data-color="{col}" aria-label="Project runs {a} to {b}"></canvas></div></section>'
-    body+=f'<section class="sec alt"><div class="wrap split"><div><h2 class="dt">Our part</h2><p>SmartAvatar takes part as a technology partner. We bring our work on live digital twins, edge AI and Zero Trust security for connected machines, and try the project’s ideas on real equipment.</p><p>For partner details or results, <a href="/contact" style="text-decoration:underline">get in touch</a>.</p><p class="mono" style="font-size:10.5px;color:var(--grey);margin-top:24px">Funded by the European Union under Horizon Europe. Views and opinions expressed are those of the authors only.</p></div><div class="art" style="--c:{col};position:relative;aspect-ratio:1;border-radius:28px;background:{col}"><canvas class="ill" data-shape="{sh}" style="position:absolute;inset:6%;width:88%;height:88%" aria-hidden="true"></canvas></div></div></section>'
+    body+=f'<section class="sec"><div class="wrap"><div class="sh"><h2 class="dt">{a}–{b}</h2><p>Horizon Europe · {b-a+1} years</p></div><canvas class="ytrack" data-start="{a}" data-end="{b}" data-color="{col}" aria-label="Project runs {a} to {b}"></canvas></div></section>'
+    body+=f'<section class="sec alt"><div class="wrap split"><div><h2 class="dt">Our part</h2><p>SmartAvatar is a partner in {e(n)}. For details, <a href="/contact" style="text-decoration:underline">get in touch</a>.</p><p class="mono" style="font-size:10.5px;color:var(--grey);margin-top:24px">Funded by the European Union under Horizon Europe. Views and opinions expressed are those of the authors only.</p></div><div class="art" style="--c:{col};position:relative;aspect-ratio:1;border-radius:28px;background:{col}"><canvas class="ill" data-shape="{sh}" style="position:absolute;inset:6%;width:88%;height:88%" aria-hidden="true"></canvas></div></div></section>'
     body+=nextbig(nx[1],'/research/'+nx[0],'Next project')
     page('research/'+s,f'{n} · SmartAvatar research',d,'research',body)
 
 # play
-body=dwhero('Play',crumb(('Play',None)),'Four small games on one handheld. Start with the A4 race, then swap the cartridge for snake, blocks or a shooter.',more('Start playing','#play'))
+body=dwhero('Play',crumb(('Play',None)),'Four small games on one handheld.',more('Start playing','#play'))
 body+=f'<section class="app" id="play" style="padding-top:20px"><div class="wrap">{arena}\n</div></section>'
 page('play','Play · SmartAvatar pocket arcade','Four pixel games on one handheld: race, snake, blocks and shooter. Remote control, made playable.','play',body,'<script src="/assets/arcade.js"></script>')
 
 # team
-body=dwhero('Team',crumb(('Team',None)),'A small team of engineers and researchers in the Netherlands, Bangladesh and Taiwan, building software for real machines.',more('Work with us','#careers'))
-offices=[('Delft','HQ · Registered office','Where it started, and where most of the work still happens.','#FFE7A9','Europe/Amsterdam'),('Amsterdam','By appointment','For partners and projects.','#DCEBFA','Europe/Amsterdam'),('Mountain View','By appointment','For our US partners.','#DBF5F0','America/Los_Angeles')]
-body+=f'<section class="sec"><div class="wrap"><div class="sh"><h2 class="dt">Right now</h2><p>The skies and clocks are live for each office.</p></div><div class="team">{"".join(f"<div class=card2 style=background:{c} data-tilt><span class=mono>{e(k)}</span><h3 class=dt>{e(n)}</h3><p>{e(d)}</p><div class=tclk data-tz={tz}></div><canvas class=osky data-tz={tz} width=240 height=80 aria-hidden=true></canvas></div>" for n,k,d,c,tz in offices)}</div></div></section>'
-vals=[('Built for real machines','Everything we make has to work on equipment that’s dirty, remote and expensive to stop.','#FFE7A9'),('Security first','Zero Trust isn’t something we add later. It’s how the platform is built.','#FFE3FB'),('Small team, real ownership','Engineers talk to customers, and researchers ship code.','#DBF5F0')]
-body+=f'<section class="sec alt"><div class="wrap split"><div><h2 class="dt">How we work</h2><p>Three things we keep coming back to. Click the deck.</p></div><div class="deck" tabindex="0" role="button" aria-label="Next card">{"".join(f"<div style=background:{c}><span class=mono>{k+1:02d} / 03</span><h3>{e(t)}</h3><p>{e(d)}</p></div>" for k,(t,d,c) in enumerate(vals))}</div></div></section>'
-body+=f'<section class="sec" id="careers"><div class="wrap split"><div><h2 class="dt">Join us</h2><p>We don’t list fixed roles right now. If you work on embedded systems, distributed software, security or AI, send us a short note about what you’d like to build.</p><a class="more" href="mailto:info@smartavatar.nl?subject=Open%20application">Send a note <i>→</i></a></div><div class="carts-row">{cartl("/consulting","Consulting","#DCEBFA","chip")}{cartl("/banded","BÅNDED","#FFE3FB","people")}<a class="cartl" href="https://tuliptech.nl" target="_blank" rel="noopener" style="--c:#E3E3FF"><span class="lab"><img alt="" data-dot="avatar" data-cell="9" data-size="120"><b>TULIPTECH ↗</b></span></a></div></div></section>'
-body+=nextbig('Say hi','/contact','Next · talk to us')
+body=dwhero('Team',crumb(('Team',None)),'Engineers and researchers in the Netherlands, Bangladesh and Taiwan.',more('Work with us','#careers'))
+offices=[('Delft','HQ · Registered office','Delft, the Netherlands.','#FFE7A9','Europe/Amsterdam'),('Amsterdam','By appointment','Amsterdam, the Netherlands.','#DCEBFA','Europe/Amsterdam'),('Mountain View','By appointment','California, United States.','#DBF5F0','America/Los_Angeles')]
+body+=f'<section class="sec"><div class="wrap"><div class="sh"><h2 class="dt">Offices</h2></div><div class="team">{"".join(f"<div class=card2 style=background:{c} data-tilt><span class=mono>{e(k)}</span><h3 class=dt>{e(n)}</h3><p>{e(d)}</p><div class=tclk data-tz={tz}></div><canvas class=osky data-tz={tz} width=240 height=80 aria-hidden=true></canvas></div>" for n,k,d,c,tz in offices)}</div></div></section>'
+body+=f'<section class="sec" id="careers"><div class="wrap split"><div><h2 class="dt">Join us</h2><p>Want to work with us? Send us a note.</p><a class="more" href="mailto:info@smartavatar.nl?subject=Open%20application">Send a note <i>→</i></a></div><div class="carts-row">{cartl("/consulting","Consulting","#DCEBFA","chip")}{cartl("/banded","BÅNDED","#FFE3FB","people")}<a class="cartl" href="https://tuliptech.nl" target="_blank" rel="noopener" style="--c:#E3E3FF"><span class="lab"><img alt="" data-dot="avatar" data-cell="9" data-size="120"><b>TULIPTECH ↗</b></span></a></div></div></section>'
+body+=nextbig('Say hi','/contact','Next')
 page('team','Team · SmartAvatar','Engineers and researchers in the Netherlands, Bangladesh and Taiwan, with offices in Delft, Amsterdam and Mountain View.','team',body)
 
 # consulting and BÅNDED: one morph story each
-body=dwhero('Consulting',crumb(('Consulting',None)),'Beyond the platform, we help teams plan and deliver connected-machine projects, find funding and get security right.',more('Book a call','/contact'),.86)
-body+=ms([dict(shape='robot',color='#DCEBFA',kicker='Service',title='Tech project consulting',text='From first idea to a working pilot: architecture, vendor choices and hands-on engineering.'),
-          dict(shape='globe',color='#E9FAC0',kicker='Service',title='Secure innovation funding',text='Help finding and writing proposals for EU and national innovation programmes.'),
-          dict(shape='shield',color='#FFE3FB',kicker='Service',title='Zero Trust security',text='Review and design of access, identity and logging for connected equipment.',href='/contact',cta='Book a call')])
-body+=nextbig('Say hi','/contact','Next · tell us about your project')
+body=dwhero('Consulting',crumb(('Consulting',None)),'Tech project consulting, innovation funding and Zero Trust security.',more('Book a call','/contact'),.86)
+body+=ms([dict(shape='robot',color='#DCEBFA',kicker='Service',title='Tech project consulting',text='Help with planning and delivering technology projects.'),
+          dict(shape='globe',color='#E9FAC0',kicker='Service',title='Secure innovation funding',text='Help with finding and applying for innovation funding.'),
+          dict(shape='shield',color='#FFE3FB',kicker='Service',title='Zero Trust security',text='Help with Zero Trust security for connected equipment.',href='/contact',cta='Book a call')])
+body+=nextbig('Say hi','/contact','Next')
 page('consulting','Consulting · SmartAvatar','Tech project consulting, secure innovation funding and Zero Trust security for connected machines.','team',body)
-body=dwhero('BÅNDED',crumb(('BÅNDED',None)),'Our programme for public and non-profit organisations: cities, institutions, universities and NGOs.',more('Get in touch','/contact'))
-body+=ms([dict(shape='house',color='#FFE7A9',kicker='BÅNDED',title='Institutions & cities',text='Digital twins and secure connectivity for public services and city equipment.'),
-          dict(shape='globe',color='#DCEBFA',kicker='BÅNDED',title='Universities & NGOs',text='Research partnerships and access to the platform for projects with public value.'),
-          dict(shape='chip',color='#DBF5F0',kicker='BÅNDED',title='BåndFixIt',text='A practical track within BÅNDED. Ask us how it could work for your organisation.',href='/contact',cta='Ask us')])
-body+=nextbig('Say hi','/contact','Next · talk to us')
+body=dwhero('BÅNDED',crumb(('BÅNDED',None)),'For institutions, cities, universities and NGOs.',more('Get in touch','/contact'))
+body+=ms([dict(shape='house',color='#FFE7A9',kicker='BÅNDED',title='Institutions & cities',text='For institutions and cities.'),
+          dict(shape='globe',color='#DCEBFA',kicker='BÅNDED',title='Universities & NGOs',text='For universities and NGOs.'),
+          dict(shape='chip',color='#DBF5F0',kicker='BÅNDED',title='BåndFixIt',text='Ask us about BåndFixIt.',href='/contact',cta='Ask us')])
+body+=nextbig('Say hi','/contact','Next')
 page('banded','BÅNDED · SmartAvatar','BÅNDED brings SmartAvatar to cities, institutions, universities and NGOs.','team',body)
 
 # contact: chat with the bot
-body=dwhero('Say hi',crumb(('Contact',None)),'Tell our bot about your machines. It writes the email for you.',more('Start chatting','#chat'),.7)
-body+=f'''<section class="sec" id="chat"><div class="wrap term-wrap"><div><h2 class="dt" style="font-size:clamp(34px,4.4vw,68px);line-height:.95">One question<br>at a time.</h2><p class="lead">Nothing is stored on this site. At the end, your own email app opens with the message filled in. We usually reply within two working days.</p>
+body=dwhero('Say hi',crumb(('Contact',None)),'Tell our bot about your machines.',more('Start chatting','#chat'),.7)
+body+=f'''<section class="sec" id="chat"><div class="wrap term-wrap"><div><h2 class="dt" style="font-size:clamp(34px,4.4vw,68px);line-height:.95">One question<br>at a time.</h2><p class="lead">At the end, your own email app opens with the message filled in.</p>
 <div class="carts-row" style="margin-top:24px"><div class="cartl" style="--c:#FFE7A9;width:auto;aspect-ratio:auto"><span class="lab"><span class="mono">Email</span><b style="font-size:16px">info@smartavatar.nl</b></span></div><div class="cartl" style="--c:#DCEBFA;width:auto;aspect-ratio:auto"><span class="lab"><span class="mono">Delft · HQ</span><b style="font-size:16px"><span class="clk" data-tz="Europe/Amsterdam"></span> now</b></span></div></div></div>
 <div id="term"><div class="tm-head"><canvas class="tm-bot" width="72" height="72" aria-hidden="true"></canvas><div><b>SmartAvatar bot</b><span class="mono" style="color:var(--grey)">online</span></div></div><div class="tm-log" aria-live="polite"></div><div class="tm-chips"></div><form autocomplete="on"><input aria-label="Your answer" placeholder="Type here and press Enter"><button class="more" type="submit">Send <i>→</i></button></form></div></div></section>'''
 page('contact','Contact · SmartAvatar','Book a demo or ask a question. SmartAvatar, Delft, the Netherlands.','contact',body)
 
 # verify
-body=dwhero('Verify',crumb(('Verify certificate',None)),'Got a SmartAvatar certificate? Enter its ID and our shield will check it.','',.7)
+body=dwhero('Verify',crumb(('Verify certificate',None)),'Enter a SmartAvatar certificate ID to check it.','',.7)
 body+=f'<section class="sec"><div class="wrap split"><div><form class="form" id="vform" style="grid-template-columns:1fr"><label>Certificate ID<input name="cid" placeholder="SA-1234-ABCD" autocomplete="off"></label><button class="more" type="submit">Check <i>→</i></button></form><div id="vout" class="vout" aria-live="polite">IDs look like SA-1234-ABCD.</div></div><div style="position:relative;aspect-ratio:1;border-radius:28px;background:#DBF5F0"><canvas class="ill" data-shape="shield" style="position:absolute;inset:6%;width:88%;height:88%" aria-hidden="true"></canvas></div></div></section>'
 page('verify','Verify a certificate · SmartAvatar','Check a SmartAvatar certificate ID.','',body)
 

@@ -1,9 +1,9 @@
 /* ===== shared page behaviour (inner pages) ===== */
 const PAGE=document.body.dataset.page||'';
 /* dock */
-const APPS=[['/','Home','#FFFFFF','house','home'],['/machines','Machines','#E3E3FF','robot','machines'],['/platform','Platform','#DCEBFA','chip','platform'],['/research','Research','#E9FAC0','bolt','research'],['/play','Play','#FFE7A9','pad','play'],['/team','Team','#FFE3FB','people','team'],['/contact','Contact','#FFFFFF','mail','contact']];
+const APPS=[['/','Home','#E6E6E0','house','home'],['/machines','Machines','#E3E3FF','robot','machines'],['/platform','Platform','#DCEBFA','chip','platform'],['/research','Research','#E9FAC0','bolt','research'],['/play','Play','#FFE7A9','pad','play'],['/team','Team','#FFE3FB','people','team'],['/contact','Contact','#E6E6E0','mail','contact']];
 const dockEl=$('#dock');
-if(dockEl){dockEl.innerHTML=APPS.map(a=>`<a href="${a[0]}" style="background:${a[2]}" class="${PAGE===a[4]?'on':''}" aria-label="${a[1]}"><span class="tip">${a[1]}</span><img alt="" src="${dotImg(a[3],12,'#111',96)}"></a>`).join('');
+if(dockEl){dockEl.innerHTML=APPS.map((a,i)=>`${i===APPS.length-1?'<span class="dsep"></span>':''}<a href="${a[0]}" style="background:${a[2]}" class="${PAGE===a[4]?'on':''} ${i===0||i===APPS.length-1?'edge':''}" aria-label="${a[1]}"><span class="tip">${a[1]}</span><img alt="" src="${dotImg(a[3],12,'#111',96)}"></a>${i===0?'<span class="dsep"></span>':''}`).join('');
   const dI=$$('#dock a');if(matchMedia('(hover:hover)').matches&&!RM){dockEl.addEventListener('mousemove',e=>dI.forEach(a=>{const r=a.getBoundingClientRect(),d=Math.abs(e.clientX-(r.left+r.width/2));a.style.transform=`scale(${(1+.55*Math.max(0,1-d/130)).toFixed(3)})`}));dockEl.addEventListener('mouseleave',()=>dI.forEach(a=>a.style.transform=''))}}
 /* clocks */
 function clocks(){const f=tz=>new Intl.DateTimeFormat('en-GB',{hour:'2-digit',minute:'2-digit',timeZone:tz}).format(new Date());const c=$('#clock');if(c)c.textContent='Delft '+f('Europe/Amsterdam');$$('.clk').forEach(c=>c.textContent=f(c.dataset.tz))}clocks();setInterval(clocks,20000);
@@ -69,7 +69,7 @@ const cf=$('#cform');if(cf)cf.addEventListener('submit',e=>{e.preventDefault();c
 /* verify */
 const vf=$('#vform');if(vf)vf.addEventListener('submit',e=>{e.preventDefault();const id=vf.elements.cid.value.trim().toUpperCase();const out=$('#vout');
   if(!/^SA-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(id)){out.className='vout bad';out.innerHTML='<b>That doesn’t look like a SmartAvatar ID.</b> IDs look like SA-1234-ABCD.';return}
-  out.className='vout wait';out.innerHTML='<b>Scanning…</b>';setTimeout(()=>{out.className='vout ok';out.innerHTML=`<b>${id} has the right format.</b> To confirm it’s genuine, <a href="mailto:info@smartavatar.nl?subject=${encodeURIComponent('Verify certificate '+id)}">ask us by email</a> and we’ll reply within two working days.`},900)});
+  out.className='vout wait';out.innerHTML='<b>Scanning…</b>';setTimeout(()=>{out.className='vout ok';out.innerHTML=`<b>${id} has the right format.</b> To confirm it’s genuine, <a href="mailto:info@smartavatar.nl?subject=${encodeURIComponent('Verify certificate '+id)}">ask us by email</a> and we’ll confirm it.`},900)});
 
 /* ===== demos on the platform feature pages ===== */
 const demo=$('[data-demo]');
