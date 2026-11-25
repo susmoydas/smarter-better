@@ -45,7 +45,8 @@ def page(path,title,desc,section,body,extra_js=''):
 <body data-page="{section}">
 <a class="skip" href="#main">Skip to content</a>
 <canvas id="pw" aria-hidden="true"></canvas>
-<div class="top"><a href="/" aria-label="SmartAvatar home"><b>SmartAvatar</b></a><span class="mono" id="clock">Delft --:--</span></div>
+<a class="mark" href="/" aria-label="SmartAvatar home"><img src="/assets/logo.svg" alt="" width="34" height="34"></a>
+<div class="top"><a href="/" tabindex="-1"><b>SmartAvatar</b></a><span class="mono" id="clock">Delft --:--</span></div>
 <main id="main">
 {body}
 </main>
@@ -81,7 +82,7 @@ FEAT=[
   lead='A live digital copy of every machine: where it is, how it’s doing and what it’s sending, updated as it happens.',
   steps=[('Connect','A small agent or gateway links the machine to the platform over a secure channel.'),('Mirror','Sensor data streams in and the avatar updates in real time.'),('Use','Dashboards, alerts and other services read from the avatar, not the machine itself.')],
   dtitle='Crane 07, live',dtext='The numbers on the right move with the real crane. Press refresh to pull a new reading.',btns=[('ping','Refresh reading')]),
- dict(slug='ota-updates',name='OTA updates',color='#FFE7A9',icon='chip',demo='ota',
+ dict(slug='ota-updates',name='OTA updates',color='#E6DEFF',icon='chip',demo='ota',
   lead='Send new software to machines in the field. Every update is signed, checked when it arrives, and rolled back by itself if something goes wrong.',
   steps=[('Sign','Each release is signed, so a machine only installs software that really comes from you.'),('Deliver','Send it to one machine or a whole fleet, in stages you control.'),('Verify or roll back','The machine checks the update. If anything fails, it returns to the last good version.')],
   dtitle='Update a tractor',dtext='Push version 4.12 to the tractor, then try rolling it back.',btns=[('push','Push v4.12'),('rollback','Roll back')]),
@@ -109,7 +110,7 @@ CASES=[
  dict(slug='healthcare',name='Healthcare',ind='Hospitals',color='#FFE3FB',shape='cart',lead='Medical data people can trust, with every access written down.',
   ch='Connected medical devices handle sensitive data that has to stay private and auditable.',ap='Policy-based access decides who sees what. Each access is logged on a tamper-evident ledger, and data handling follows GDPR.',
   out='A clear answer whenever someone asks who touched the data.',stat=('100%','Of data access logged'),feats=['zero-trust','live-twin','ota-updates']),
- dict(slug='insurance',name='Insurance',ind='Mobility',color='#FFE7A9',shape='car',lead='Clear proof of who drove, when, and how carefully.',
+ dict(slug='insurance',name='Insurance',ind='Mobility',color='#E6DEFF',shape='car',lead='Clear proof of who drove, when, and how carefully.',
   ch='With shared cars it’s hard to know who was driving when something happened.',ap='The vehicle’s avatar records trips and driver identity, signed and stored so nobody can change them later.',
   out='Faster and fairer claims.',stat=('1 tap','To share proof of a trip'),feats=['live-twin','zero-trust','edge-ai']),
  dict(slug='agriculture',name='Agriculture',ind='Farming',color='#E9FAC0',shape='tractor',lead='Tractors that only take orders they can verify.',
@@ -119,7 +120,7 @@ CASES=[
   ch='Fleets have thousands of entry points, and attacks often look like normal traffic.',ap='Edge AI on each machine learns what normal looks like and flags anything odd, while Zero Trust blocks unknown devices.',
   out='Problems are caught at the edge, before they spread.',stat=('Edge','Where anomalies are flagged first'),feats=['edge-ai','zero-trust','live-twin']),
 ]
-PROJ=[('metacities','MetaCities',2023,2026,'#FFE7A9','globe','Digital twins of urban life, from traffic to public services.'),
+PROJ=[('metacities','MetaCities',2023,2026,'#E6DEFF','globe','Digital twins of urban life, from traffic to public services.'),
       ('6g-icarus','6G-ICARUS',2024,2028,'#DCEBFA','chip','Intelligent 6G networks that adapt to the machines they connect.'),
       ('isac-newton','ISAC-NEWTON',2025,2029,'#DBF5F0','globe','Networks that sense as well as talk, for safer shared spaces.'),
       ('referee','REFEREE',2026,2029,'#FFE3FB','shield','Verification and trust for autonomous systems.'),
@@ -132,5 +133,5 @@ exec(open('src/pages.py').read())
 paths=['','platform']+['platform/'+f['slug'] for f in FEAT]+['machines']+['machines/'+c['slug'] for c in CASES]+['research']+['research/'+p[0] for p in PROJ]+['play','team','consulting','banded','contact','verify','privacy','terms']
 open('sitemap.xml','w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+''.join(f'  <url><loc>{SITE}/{p}</loc></url>\n' for p in paths)+'</urlset>\n')
 open('robots.txt','w').write(f'User-agent: *\nAllow: /\nSitemap: {SITE}/sitemap.xml\n')
-open('assets/favicon.svg','w').write('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" shape-rendering="crispEdges"><rect width="16" height="16" rx="3" fill="#111"/><g fill="#FFE7A9"><rect x="4" y="4" width="8" height="6"/></g><g fill="#111"><rect x="6" y="6" width="1" height="2"/><rect x="9" y="6" width="1" height="2"/></g><rect x="7" y="2" width="2" height="2" fill="#F2A7E6"/><rect x="5" y="11" width="6" height="2" fill="#F2A7E6"/></svg>')
+open('assets/favicon.svg','w').write('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" shape-rendering="crispEdges"><rect width="16" height="16" rx="3" fill="#111"/><g fill="#E6DEFF"><rect x="4" y="4" width="8" height="6"/></g><g fill="#111"><rect x="6" y="6" width="1" height="2"/><rect x="9" y="6" width="1" height="2"/></g><rect x="7" y="2" width="2" height="2" fill="#F2A7E6"/><rect x="5" y="11" width="6" height="2" fill="#F2A7E6"/></svg>')
 print('pages:',len(paths))

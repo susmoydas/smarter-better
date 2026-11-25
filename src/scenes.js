@@ -3,7 +3,7 @@ const fontReady=()=>document.fonts.load('600 120px "Pixelify Sans"').catch(()=>{
 const seedf=i=>Math.abs(Math.sin(i*12.9898)*43758.5)%1;
 const MB=[0,8,2,10,12,4,14,6,3,11,1,9,15,7,13,5];
 const KID=["..####..",".#yyyy#.",".#y#y##.",".#yyyy#.","..####..",".#pppp#.","#.#pp#.#","..#..#.."],KID2=["..####..",".#yyyy#.",".#y#y##.",".#yyyy#.","..####..",".#pppp#.","#.#pp#.#",".#....#."];
-const KC={'#':'#111','y':'#FFE7A9','p':'#F2A7E6','m':'#DBF5F0','l':'#ABABF5'};
+const KC={'#':'#111','y':'#E6DEFF','p':'#F2A7E6','m':'#DBF5F0','l':'#ABABF5'};
 function sprite(c,rows,x,y,s,flip,pal=KC){rows.forEach((r,j)=>[...r].forEach((ch,i)=>{const col=pal[ch];if(!col)return;c.fillStyle=col;c.fillRect(Math.round(x+(flip?7-i:i)*s),Math.round(y+j*s),Math.ceil(s),Math.ceil(s))}))}
 
 /* 1 · dot words: the page name drawn in dots you can push; it scatters as you scroll away */
@@ -94,16 +94,16 @@ const tm=$('#term');if(tm){const log=tm.querySelector('.tm-log'),inp=tm.querySel
         TALK=["...######...","..#yyyyyy#..",".#yyyyyyyy#.",".#y##yy##y#.",".#y##yy##y#.",".#yyyyyyyy#.",".#yyy##yyy#.","..#yy##yy#..","...######...","..#pppppp#..",".#pppppppp#."];
   (function f(t){bx.clearRect(0,0,bc.width,bc.height);const age=t-modeT;if(age>1400&&mode!=='idle')mode='idle';let rows=Math.floor(t/2600)%14===0?BLINK:HEAD,dy=0,dx=0;
     if(mode==='talk')rows=Math.floor(t/120)%2?TALK:HEAD;if(mode==='cheer')dy=-Math.abs(Math.sin(t/120))*6;if(mode==='no')dx=Math.sin(t/40)*3;if(mode==='think')dy=Math.sin(t/200)*2;if(mode==='listen')dy=-1;
-    sprite(bx,rows,6+dx,8+dy,5,false,{'#':'#111','y':'#FFE7A9','p':'#F2A7E6'});if(mode==='think'){bx.fillStyle='#111';for(let k=0;k<3;k++)if(Math.floor(t/250)%3>=k)bx.fillRect(28+k*8,2,4,4)}requestAnimationFrame(f)})(0)}
+    sprite(bx,rows,6+dx,8+dy,5,false,{'#':'#111','y':'#E6DEFF','p':'#F2A7E6'});if(mode==='think'){bx.fillStyle='#111';for(let k=0;k<3;k++)if(Math.floor(t/250)%3>=k)bx.fillRect(28+k*8,2,4,4)}requestAnimationFrame(f)})(0)}
 
 /* 7 · office skies: a small pixel sky that is day or night where the office really is */
 $$('canvas.osky').forEach(cv=>{const tz=cv.dataset.tz,c=cv.getContext('2d'),W=cv.width,H=cv.height;
   function draw(t){const h=+new Intl.DateTimeFormat('en-GB',{hour:'numeric',hourCycle:'h23',timeZone:tz}).format(new Date());const night=h<6||h>=20,dusk=(h>=6&&h<8)||(h>=18&&h<20);
     c.fillStyle=night?'#2B2B31':dusk?'#FFE3FB':'#DCEBFA';c.fillRect(0,0,W,H);
-    if(night){for(let i=0;i<14;i++){if((Math.floor(t/600)+i)%5){c.fillStyle='#fff';c.fillRect((i*37)%W,(i*23)%(H-30),2,2)}}c.fillStyle='#FFE7A9';c.fillRect(W-40,12,14,14);c.fillStyle='#2B2B31';c.fillRect(W-34,10,12,12)}
-    else{c.fillStyle='#F5C95C';c.fillRect(W-42,dusk?H-38:12,16,16);c.fillStyle='#fff';const cx=((t/60)%(W+60))-40;c.fillRect(cx,18,30,8);c.fillRect(cx+6,14,16,4)}
+    if(night){for(let i=0;i<14;i++){if((Math.floor(t/600)+i)%5){c.fillStyle='#fff';c.fillRect((i*37)%W,(i*23)%(H-30),2,2)}}c.fillStyle='#E6DEFF';c.fillRect(W-40,12,14,14);c.fillStyle='#2B2B31';c.fillRect(W-34,10,12,12)}
+    else{c.fillStyle='#B9A6F2';c.fillRect(W-42,dusk?H-38:12,16,16);c.fillStyle='#fff';const cx=((t/60)%(W+60))-40;c.fillRect(cx,18,30,8);c.fillRect(cx+6,14,16,4)}
     c.fillStyle=night?'#4a4a52':'#B4DC55';for(let x=0;x<W;x+=4){const hh=10+Math.round(Math.sin(x*.07)*4);c.fillRect(x,H-hh,4,hh)}
-    c.fillStyle=night?'#FFE7A9':'#111';c.fillRect(20,H-26,16,16);c.fillStyle=night?'#2B2B31':'#fff';c.fillRect(24,H-22,3,3);c.fillRect(29,H-22,3,3);requestAnimationFrame(draw)}requestAnimationFrame(draw)});
+    c.fillStyle=night?'#E6DEFF':'#111';c.fillRect(20,H-26,16,16);c.fillStyle=night?'#2B2B31':'#fff';c.fillRect(24,H-22,3,3);c.fillRect(29,H-22,3,3);requestAnimationFrame(draw)}requestAnimationFrame(draw)});
 
 /* 8 · card deck: click to send the top card to the back */
 $$('.deck').forEach(dk=>{const cards=[...dk.children];const lay=()=>cards.forEach((c,i)=>gsap.to(c,{x:i*10,y:i*10,rotation:i*1.5,zIndex:cards.length-i,scale:1-i*.03,duration:.5,ease:'power3.out'}));lay();

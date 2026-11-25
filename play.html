@@ -14,7 +14,8 @@
 <body data-page="play">
 <a class="skip" href="#main">Skip to content</a>
 <canvas id="pw" aria-hidden="true"></canvas>
-<div class="top"><a href="/" aria-label="SmartAvatar home"><b>SmartAvatar</b></a><span class="mono" id="clock">Delft --:--</span></div>
+<a class="mark" href="/" aria-label="SmartAvatar home"><img src="/assets/logo.svg" alt="" width="34" height="34"></a>
+<div class="top"><a href="/" tabindex="-1"><b>SmartAvatar</b></a><span class="mono" id="clock">Delft --:--</span></div>
 <main id="main">
 <section class="dwh"><div class="wrap"><div class="crumb mono"><a href="/">Home</a> <span>/</span> <span>Play</span></div></div><h1 class="sr">Play</h1>
 <canvas class="dw" data-word="Play" data-fill="0.9" data-scroll aria-hidden="true"></canvas>
@@ -22,7 +23,7 @@
     <div class="side">
       <div class="panel carts"><span class="mono">Cartridges · tap one to insert</span>
         <div class="cartlist" id="carts">
-          <button class="cart on" data-cart="race" style="--c:#F5C95C"><span class="lab"><canvas width="16" height="16"></canvas><b>RACE</b></span><i></i></button>
+          <button class="cart on" data-cart="race" style="--c:#B9A6F2"><span class="lab"><canvas width="16" height="16"></canvas><b>RACE</b></span><i></i></button>
           <button class="cart" data-cart="snake" style="--c:#8FD9C9"><span class="lab"><canvas width="16" height="16"></canvas><b>SNAKE</b></span><i></i></button>
           <button class="cart" data-cart="blocks" style="--c:#ABABF5"><span class="lab"><canvas width="16" height="16"></canvas><b>BLOCKS</b></span><i></i></button>
           <button class="cart" data-cart="shooter" style="--c:#F2A7E6"><span class="lab"><canvas width="16" height="16"></canvas><b>SHOOTER</b></span><i></i></button>
@@ -30,7 +31,7 @@
       <div class="panel score"><span class="mono" id="bestlab">Your best · Race</span><b class="dt" id="best">0</b><small><span id="now">Press start to play</span> · saved on this device</small></div>
     </div>
     <div class="stagewrap"><div class="gb" id="gb">
-      <div class="slot" id="slot"><span id="slotlab" style="--c:#F5C95C">RACE</span></div>
+      <div class="slot" id="slot"><span id="slotlab" style="--c:#B9A6F2">RACE</span></div>
       <div class="bezel"><div class="bz"><span><i></i>LIVE · <span id="lat">18</span> MS</span><span id="bzr">A4 · DELFT → ROTTERDAM</span></div><canvas id="screen" width="240" height="200" aria-label="Handheld game screen"></canvas></div>
       <div class="brand">SmartAvatar</div>
       <div class="ctl">

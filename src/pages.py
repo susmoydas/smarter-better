@@ -70,7 +70,7 @@ page('play','Play · SmartAvatar pocket arcade','Four pixel games on one handhel
 
 # team
 body=dwhero('Team',crumb(('Team',None)),'Engineers and researchers in the Netherlands, Bangladesh and Taiwan.',more('Work with us','#careers'))
-offices=[('Delft','HQ · Registered office','Delft, the Netherlands.','#FFE7A9','Europe/Amsterdam'),('Amsterdam','By appointment','Amsterdam, the Netherlands.','#DCEBFA','Europe/Amsterdam'),('Mountain View','By appointment','California, United States.','#DBF5F0','America/Los_Angeles')]
+offices=[('Delft','HQ · Registered office','Delft, the Netherlands.','#E6DEFF','Europe/Amsterdam'),('Amsterdam','By appointment','Amsterdam, the Netherlands.','#DCEBFA','Europe/Amsterdam'),('Mountain View','By appointment','California, United States.','#DBF5F0','America/Los_Angeles')]
 body+=f'<section class="sec"><div class="wrap"><div class="sh"><h2 class="dt">Offices</h2></div><div class="team">{"".join(f"<div class=card2 style=background:{c} data-tilt><span class=mono>{e(k)}</span><h3 class=dt>{e(n)}</h3><p>{e(d)}</p><div class=tclk data-tz={tz}></div><canvas class=osky data-tz={tz} width=240 height=80 aria-hidden=true></canvas></div>" for n,k,d,c,tz in offices)}</div></div></section>'
 body+=f'<section class="sec" id="careers"><div class="wrap split"><div><h2 class="dt">Join us</h2><p>Want to work with us? Send us a note.</p><a class="more" href="mailto:info@smartavatar.nl?subject=Open%20application">Send a note <i>→</i></a></div><div class="carts-row">{cartl("/consulting","Consulting","#DCEBFA","chip")}{cartl("/banded","BÅNDED","#FFE3FB","people")}<a class="cartl" href="https://tuliptech.nl" target="_blank" rel="noopener" style="--c:#E3E3FF"><span class="lab"><img alt="" data-dot="avatar" data-cell="9" data-size="120"><b>TULIPTECH ↗</b></span></a></div></div></section>'
 body+=nextbig('Say hi','/contact','Next')
@@ -84,7 +84,7 @@ body+=ms([dict(shape='robot',color='#DCEBFA',kicker='Service',title='Tech projec
 body+=nextbig('Say hi','/contact','Next')
 page('consulting','Consulting · SmartAvatar','Tech project consulting, secure innovation funding and Zero Trust security for connected machines.','team',body)
 body=dwhero('BÅNDED',crumb(('BÅNDED',None)),'For institutions, cities, universities and NGOs.',more('Get in touch','/contact'))
-body+=ms([dict(shape='house',color='#FFE7A9',kicker='BÅNDED',title='Institutions & cities',text='For institutions and cities.'),
+body+=ms([dict(shape='house',color='#E6DEFF',kicker='BÅNDED',title='Institutions & cities',text='For institutions and cities.'),
           dict(shape='globe',color='#DCEBFA',kicker='BÅNDED',title='Universities & NGOs',text='For universities and NGOs.'),
           dict(shape='chip',color='#DBF5F0',kicker='BÅNDED',title='BåndFixIt',text='Ask us about BåndFixIt.',href='/contact',cta='Ask us')])
 body+=nextbig('Say hi','/contact','Next')
@@ -93,7 +93,7 @@ page('banded','BÅNDED · SmartAvatar','BÅNDED brings SmartAvatar to cities, in
 # contact: chat with the bot
 body=dwhero('Say hi',crumb(('Contact',None)),'Tell our bot about your machines.',more('Start chatting','#chat'),.7)
 body+=f'''<section class="sec" id="chat"><div class="wrap term-wrap"><div><h2 class="dt" style="font-size:clamp(34px,4.4vw,68px);line-height:.95">One question<br>at a time.</h2><p class="lead">At the end, your own email app opens with the message filled in.</p>
-<div class="carts-row" style="margin-top:24px"><div class="cartl" style="--c:#FFE7A9;width:auto;aspect-ratio:auto"><span class="lab"><span class="mono">Email</span><b style="font-size:16px">info@smartavatar.nl</b></span></div><div class="cartl" style="--c:#DCEBFA;width:auto;aspect-ratio:auto"><span class="lab"><span class="mono">Delft · HQ</span><b style="font-size:16px"><span class="clk" data-tz="Europe/Amsterdam"></span> now</b></span></div></div></div>
+<div class="carts-row" style="margin-top:24px"><div class="cartl" style="--c:#E6DEFF;width:auto;aspect-ratio:auto"><span class="lab"><span class="mono">Email</span><b style="font-size:16px">info@smartavatar.nl</b></span></div><div class="cartl" style="--c:#DCEBFA;width:auto;aspect-ratio:auto"><span class="lab"><span class="mono">Delft · HQ</span><b style="font-size:16px"><span class="clk" data-tz="Europe/Amsterdam"></span> now</b></span></div></div></div>
 <div id="term"><div class="tm-head"><canvas class="tm-bot" width="72" height="72" aria-hidden="true"></canvas><div><b>SmartAvatar bot</b><span class="mono" style="color:var(--grey)">online</span></div></div><div class="tm-log" aria-live="polite"></div><div class="tm-chips"></div><form autocomplete="on"><input aria-label="Your answer" placeholder="Type here and press Enter"><button class="more" type="submit">Send <i>→</i></button></form></div></div></section>'''
 page('contact','Contact · SmartAvatar','Book a demo or ask a question. SmartAvatar, Delft, the Netherlands.','contact',body)
 
