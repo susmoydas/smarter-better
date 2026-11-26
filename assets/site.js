@@ -289,5 +289,14 @@ function scatterIn(){FD.forEach(p=>{p.x=p.hx+(Math.random()-.5)*fW*1.2;p.y=p.hy+
 $('#copy').addEventListener('click',()=>{try{navigator.clipboard.writeText('info@smartavatar.nl')}catch(e){}$('#copy').textContent='Copied ✓';setTimeout(()=>$('#copy').textContent='Copy',1600)});
 
 
+/* pixel icons for the cartridges: cells on a 12×12 grid, outlined in ink */
+(function(){const rect=(x0,y0,x1,y1)=>{const o=[];for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++)o.push([x,y]);return o};
+  const I={race:[[rect(1,5,10,7),'C'],[rect(3,3,8,4),'C'],[rect(4,3,7,4),'#fff'],[[[1,6]],'#F2A7E6'],[[[10,6]],'#fff'],[rect(2,8,3,9).concat(rect(8,8,9,9)),'#111']],
+    snake:[[[[2,2],[3,2],[4,2],[5,2],[6,2],[7,2],[7,3],[7,4],[6,4],[5,4],[4,4],[3,4],[2,4],[2,5],[2,6],[3,6],[4,6],[5,6],[6,6],[7,6],[8,6],[8,7],[8,8]],'C'],[[[8,9],[8,10]],'C'],[[[9,10]],'#fff'],[[[10,3],[10,4]],'#F2A7E6']],
+    blocks:[[[[2,9],[3,9],[4,9],[3,8]],'C'],[[[6,7],[6,8],[6,9],[7,9]],'#F2A7E6'],[[[8,8],[9,8],[8,9],[9,9]],'#9CC3EE'],[[[4,2],[4,3],[4,4],[4,5]],'C']],
+    shooter:[[[[5,7],[6,7]].concat(rect(4,8,7,8),rect(3,9,8,9),[[3,10],[8,10]]),'C'],[[[5,9],[6,9]],'#fff'],[[[5,4],[5,5]],'#fff'],[rect(2,1,3,2).concat(rect(8,1,9,2)),'#F2A7E6']]};
+  window.pixIcon=(g,id,ox,oy,s,col)=>{const L=I[id];if(!L)return;g.fillStyle='#111';L.forEach(([cells,c])=>cells.forEach(([x,y])=>g.fillRect(ox+(x-1)*s,oy+(y-1)*s,s*3,s*3)));
+    L.forEach(([cells,c])=>{g.fillStyle=c==='C'?col:c;cells.forEach(([x,y])=>g.fillRect(ox+x*s,oy+y*s,s,s))})}})();
+
 addEventListener("load",()=>ScrollTrigger.refresh());
 })();

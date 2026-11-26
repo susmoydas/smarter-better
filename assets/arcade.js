@@ -1,5 +1,13 @@
 (()=>{
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));const RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
+/* pixel icons for the cartridges: cells on a 12×12 grid, outlined in ink */
+(function(){const rect=(x0,y0,x1,y1)=>{const o=[];for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++)o.push([x,y]);return o};
+  const I={race:[[rect(1,5,10,7),'C'],[rect(3,3,8,4),'C'],[rect(4,3,7,4),'#fff'],[[[1,6]],'#F2A7E6'],[[[10,6]],'#fff'],[rect(2,8,3,9).concat(rect(8,8,9,9)),'#111']],
+    snake:[[[[2,2],[3,2],[4,2],[5,2],[6,2],[7,2],[7,3],[7,4],[6,4],[5,4],[4,4],[3,4],[2,4],[2,5],[2,6],[3,6],[4,6],[5,6],[6,6],[7,6],[8,6],[8,7],[8,8]],'C'],[[[8,9],[8,10]],'C'],[[[9,10]],'#fff'],[[[10,3],[10,4]],'#F2A7E6']],
+    blocks:[[[[2,9],[3,9],[4,9],[3,8]],'C'],[[[6,7],[6,8],[6,9],[7,9]],'#F2A7E6'],[[[8,8],[9,8],[8,9],[9,9]],'#9CC3EE'],[[[4,2],[4,3],[4,4],[4,5]],'C']],
+    shooter:[[[[5,7],[6,7]].concat(rect(4,8,7,8),rect(3,9,8,9),[[3,10],[8,10]]),'C'],[[[5,9],[6,9]],'#fff'],[[[5,4],[5,5]],'#fff'],[rect(2,1,3,2).concat(rect(8,1,9,2)),'#F2A7E6']]};
+  window.pixIcon=(g,id,ox,oy,s,col)=>{const L=I[id];if(!L)return;g.fillStyle='#111';L.forEach(([cells,c])=>cells.forEach(([x,y])=>g.fillRect(ox+(x-1)*s,oy+(y-1)*s,s*3,s*3)));
+    L.forEach(([cells,c])=>{g.fillStyle=c==='C'?col:c;cells.forEach(([x,y])=>g.fillRect(ox+x*s,oy+y*s,s,s))})}})();
 /* ===== AVATAR RUN (original retro racer) ===== */
 const cv=$('#screen'), x=cv.getContext('2d'); x.imageSmoothingEnabled=false;
 const W=240,H=200,HOR=76,ROADB=H-44, gb=$('#gb');
@@ -124,9 +132,7 @@ gsap.fromTo('#arena .panel',{y:40,opacity:0},{y:0,opacity:1,stagger:.08,duration
     txt('SCORE '+String(SH.score).padStart(4,'0'),4,3);txt('WAVE '+SH.wave,W/2,3,INK,8,'center');for(let i=0;i<SH.lives;i++){x.fillStyle='#B9A6F2';x.fillRect(W-12-i*10,4,6,6);x.fillStyle=INK;x.fillRect(W-12-i*10,4,6,1)}}
   const INIT=[snInit,blInit,shInit],UPD=[snUpd,blUpd,shUpd],DRAW=[snDraw,blDraw,shDraw];INIT[0]();
   function title(){scene();const a=ACC[GW.g];x.fillStyle=INK;x.fillRect(W/2-46,22,92,46);x.fillStyle=a;x.fillRect(W/2-44,24,88,42);
-    if(GW.g===0){for(let i=0;i<6;i++){x.fillStyle=INK;x.fillRect(W/2-30+i*8,42,8,8);x.fillStyle=i===5?'#B9A6F2':'#fff';x.fillRect(W/2-29+i*8,43,6,6)}x.fillStyle='#F2A7E6';x.fillRect(W/2+28,43,6,6)}
-    if(GW.g===1){[[0,0],[1,0],[2,0],[1,1],[4,1],[5,1],[4,0],[5,0]].forEach(([i,j])=>{x.fillStyle=INK;x.fillRect(W/2-24+i*8,36+j*8,8,8);x.fillStyle=i<3?'#fff':'#9CC3EE';x.fillRect(W/2-23+i*8,37+j*8,6,6)})}
-    if(GW.g===2){for(let i=0;i<3;i++){const fx=W/2-34+i*24;x.fillStyle=INK;x.fillRect(fx,32,12,9);x.fillStyle='#fff';x.fillRect(fx+1,33,10,6);x.fillStyle=INK;x.fillRect(fx+3,35,2,2);x.fillRect(fx+7,35,2,2)}x.fillStyle=INK;x.fillRect(W/2-5,56,10,6);x.fillRect(W/2-1,46,2,6)}
+    window.pixIcon(x,['snake','blocks','shooter'][GW.g],W/2-18,27,3,a);
     txt(NAMES[GW.g],W/2,78,INK,16,'center');if(GW.t%40<26)txt('PRESS START',W/2,108,INK,8,'center');txt('BEST '+best[GW.g],W/2,128,'#666',8,'center')}
   let last=performance.now(),load=0;
   function loop(now){const dt=Math.min(.05,(now-last)/1000);last=now;if(ARC.active){GW.t++;
@@ -154,10 +160,8 @@ gsap.fromTo('#arena .panel',{y:40,opacity:0},{y:0,opacity:1,stagger:.08,duration
   addEventListener('keyup',e=>{const k=KM[e.key];if(k)press(k,false)});
   addEventListener('scroll',()=>{if(ARC.active&&!vis()&&GW.st==='play')GW.paused=true},{passive:true});
   /* cartridges */
-  const ICO={race:["........","..####..",".#yyyy#.","########","#y####y#","########",".##..##.","........"],snake:["........",".######.",".#mmmm#.",".#m####.",".#mmmm#.",".####m#.","..#mmm#p","..####.."],
-    blocks:["........","###.....","#l#.....","########","#l##l##l","########","........","........"],shooter:["...##...","...##...","..####..",".#yyyy#.","########","##....##","........","........"]};
-  const ICC={'#':'#111','p':'#111'};
-  $$('.cart').forEach(c=>{const g=c.querySelector('canvas').getContext('2d'),cc=getComputedStyle(c).getPropertyValue('--c').trim();ICO[c.dataset.cart].forEach((r,y)=>[...r].forEach((ch,i)=>{const col=ICC[ch]||((ch==='y'||ch==='m'||ch==='l')?cc:null);if(col){g.fillStyle=col;g.beginPath();g.arc(i*2+1,y*2+1,1.05,0,7);g.fill()}}))});
+  const pixIcon=window.pixIcon;
+  $$('.cart').forEach(c=>{const cv=c.querySelector('canvas');cv.width=cv.height=28;const g=cv.getContext('2d');g.clearRect(0,0,28,28);pixIcon(g,c.dataset.cart,2,2,2,getComputedStyle(c).getPropertyValue('--c').trim())});
   const HOW={race:['Reach Rotterdam before the clock runs out.',[['#E6DEFF','Signal','+2 s'],['#DBF5F0','Checkpoint','+12 s'],['#FFE3FB','Crash','−3 s']],[['Enter','Start'],['← →','Steer'],['↑ A','Hold to drive'],['B','Pause']],'A4 · DELFT → ROTTERDAM'],
     snake:['Eat the signals, grow your avatar, never bite yourself.',[['#FFE3FB','Signal','+10'],['#DBF5F0','Faster each bite',''],['#E3E3FF','Hit a wall','end']],[['Enter','Start'],['← ↑ → ↓','Turn'],['B','Pause']],'GRID · 32 × 18'],
     blocks:['Stack the blocks and clear full lines.',[['#E3E3FF','1 line','+40'],['#E6DEFF','4 lines','+1200'],['#FFE3FB','Top out','end']],[['Enter','Start'],['← →','Move'],['↑ A','Rotate'],['↓','Soft drop'],['B','Hard drop']],'STACK · 10 × 19'],

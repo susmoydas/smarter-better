@@ -17,7 +17,7 @@ HEAD_JS="const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAl
 shapes=between('/* ================= SHAPES','/* ================= LOADER')
 footjs=between('/* ================= FOOTER: dot playground','/* ===== AVATAR RUN')
 open('assets/site.js','w').write('(()=>{\n'+HEAD_JS+shapes+open('src/core.js').read()+'\n'+open('src/scenes.js').read()+'\n'+footjs+'\naddEventListener("load",()=>ScrollTrigger.refresh());\n})();\n')
-racing=between('/* ===== AVATAR RUN',"if(matchMedia('(hover:hover) and (pointer:fine)')")
+racing=between('/* pixel icons for the cartridges',"if(matchMedia('(hover:hover) and (pointer:fine)')")
 arcade=between('/* ===== ARCADE CARTRIDGES','/* ===== pixel transitions')
 open('assets/arcade.js','w').write('(()=>{\nconst $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));const RM=matchMedia("(prefers-reduced-motion: reduce)").matches;\n'+racing+arcade+'\n})();\n')
 arena=between('<div class="arena" id="arena">','\n</div></section>')
@@ -38,7 +38,7 @@ def page(path,title,desc,section,body,extra_js=''):
 <link rel="canonical" href="{url}">
 <meta property="og:type" content="website"><meta property="og:site_name" content="SmartAvatar"><meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(desc)}"><meta property="og:url" content="{url}"><meta property="og:image" content="{SITE}/assets/og.png">
 <meta name="twitter:card" content="summary_large_image"><meta name="theme-color" content="#F2F2EE">
-<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon.svg?v=4" type="image/svg+xml">
 {FONTS}
 <link rel="stylesheet" href="/assets/site.css">
 </head>
@@ -46,7 +46,7 @@ def page(path,title,desc,section,body,extra_js=''):
 <a class="skip" href="#main">Skip to content</a>
 <canvas id="pw" aria-hidden="true"></canvas>
 <a class="mark" href="/" aria-label="SmartAvatar home"><img src="/assets/logo.svg" alt="" width="34" height="34"></a>
-<div class="top"><a href="/" tabindex="-1"><b>SmartAvatar</b></a><span class="mono" id="clock">Delft --:--</span></div>
+<div class="top"><span></span><span class="mono" id="clock">Delft --:--</span></div>
 <main id="main">
 {body}
 </main>
@@ -133,5 +133,5 @@ exec(open('src/pages.py').read())
 paths=['','platform']+['platform/'+f['slug'] for f in FEAT]+['machines']+['machines/'+c['slug'] for c in CASES]+['research']+['research/'+p[0] for p in PROJ]+['play','team','consulting','banded','contact','verify','privacy','terms']
 open('sitemap.xml','w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+''.join(f'  <url><loc>{SITE}/{p}</loc></url>\n' for p in paths)+'</urlset>\n')
 open('robots.txt','w').write(f'User-agent: *\nAllow: /\nSitemap: {SITE}/sitemap.xml\n')
-open('assets/favicon.svg','w').write('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" shape-rendering="crispEdges"><rect width="16" height="16" rx="3" fill="#111"/><g fill="#E6DEFF"><rect x="4" y="4" width="8" height="6"/></g><g fill="#111"><rect x="6" y="6" width="1" height="2"/><rect x="9" y="6" width="1" height="2"/></g><rect x="7" y="2" width="2" height="2" fill="#F2A7E6"/><rect x="5" y="11" width="6" height="2" fill="#F2A7E6"/></svg>')
+exec(open('src/logo.py').read())
 print('pages:',len(paths))
